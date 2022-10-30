@@ -2,7 +2,6 @@
 
 現在変更になっている仕様を書き換えました。主にコマンドを打った時に表示される内容です。
 git checkout　⇨ git restore など。
-また、現在（2022/10/30）masterは基本的に全てmainに読み替えてください（暇な時に直します）。
 
 ***
 
@@ -14,7 +13,7 @@ git checkout　⇨ git restore など。
 
     $ cd path/to/my_first_workspace
     $ git status
-    # On branch master
+    # On branch main
     nothing to commit, working directory clean
 
 はい、nothing to commit, woking directory clean だそうです。「コミットするものはなにもないし、作業ディレクトリもキレイなままだよ」と教えてくれてますね。リポジトリに登録されてる内容と、作業ディレクトリの間に変更がないよ、ということです。
@@ -34,7 +33,7 @@ git checkout　⇨ git restore など。
 ではここで、おもむろに `git status` です
 
     $ git status
-    # On branch master
+    # On branch main
     # Changes not staged for commit:
     #   (use "git add <file>..." to update what will be committed)
     #   (use "git restore <file>..." to discard changes in working directory)
@@ -68,7 +67,7 @@ git checkout　⇨ git restore など。
 当然ですが、この状態で git status をすれば「working directory は clean だよ」って言われます。
 
     $ git status
-    # On branch master
+    # On branch main
     nothing to commit, working directory clean
 
 おっと！寄り道をしてしまいました。せっかく編集したファイルをもとにもどしてしまったので、もう一度 nyan を mew に書き換えて、コミットしてみましょう。
@@ -78,7 +77,7 @@ git checkout　⇨ git restore など。
 書き換えましたか？ では `git status` で状態を確認。
 
     $ git status
-    # On branch master
+    # On branch main
     # Changes not staged for commit:
     #   (use "git add <file>..." to update what will be committed)
     #   (use "git restore <file>..." to discard changes in working directory)
@@ -94,7 +93,7 @@ git checkout　⇨ git restore など。
 `git status` で確認
 
     $ git status
-    # On branch master
+    # On branch main
     # Changes to be committed:
     #   (use "git restore --staged <file>..." to unstage)
     #
@@ -118,7 +117,7 @@ git checkout　⇨ git restore など。
 じゃあ `git status` で確認だ！
 
     $ git status
-    # On branch master
+    # On branch main
     # Changes not staged for commit:
     #   (use "git add <file>..." to update what will be committed)
     #   (use "git restore <file>..." to discard changes in working directory)
@@ -139,7 +138,7 @@ git checkout　⇨ git restore など。
 
 でエディタが立ち上がるので、「猫の鳴き声を nyan から mew に変更」みたいな感じのコミットメッセージを書いて変更、保存です。
 
-    [master 66346b5] 猫の鳴き声を nyan から mew に変更
+    [main 66346b5] 猫の鳴き声を nyan から mew に変更
      1 file changed, 1 insertion(+), 1 deletion(-)
 
 と表示されました。「1 file changed, 1 insertion(+), 1 deletion(-)」だってさ。つまり、「一つのファイルが変更されててー、一行挿入されててー、一行消えてる！」とのことです、一行編集するってのは言い換えれば一行消して一行挿入するってことなので、なるほどね！って感じですね。
