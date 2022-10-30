@@ -148,6 +148,25 @@ nothing to commit, working directory clean
 
 ```
 $ git push
+Counting objects: 1, done.
+Writing objects: 100% (1/1), 226 bytes, done.
+Total 1 (delta 0), reused 0 (delta 0)
+To ../shared_repo.git
+   a10bcb5..38f43dc  main -> main
+```
+
+***
+
+デフォルトでは2022/10/30現在、「選択されているブランチが追跡されているブランチであれば、そのまま変更を反映する」
+と思われます。違うことが判明したら修正します。以下の部分はオリジナルの記述です。
+
+***
+
+<details>
+<summary>こちらは現状の動作とは異なります</summary>
+
+```
+$ git push
 warning: push.default is unset; its implicit value is changing in
 Git 2.0 from 'matching' to 'simple'. To squelch this message
 and maintain the current behavior after the default changes, use:
@@ -168,6 +187,7 @@ Total 1 (delta 0), reused 0 (delta 0)
 To ../shared_repo.git
    a10bcb5..38f43dc  main -> main
 ```
+
 
 ヒャー！なんか warning が出た！
 
@@ -210,6 +230,9 @@ To ../shared_repo.git
 
 と、今回 `git push` で行われた内容を一通り確認したところで、push.default の値をどちらに設定するか、決めておきましょう。まあ、ここは素直に新しいほうに合わせて simple に設定しておきましょう。こっちのほうが「あっやべ！ push しちゃいけないやつ push しちゃった！」みたいな事故にあわずに済みそうです。
 
+</details>
+    
+    
 さて、それでは現在のグラフを確認しましょう。
 
 ```
