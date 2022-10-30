@@ -61,7 +61,7 @@
 
 さて、上記のようにコマンドを打ってみると、
 
-    # On branch master
+    # On branch main
     #
     # Initial commit
     #
@@ -73,7 +73,7 @@
 
 というような表示が出てきたかと思います。「ウワァ英語だ！助けて！」みたいにならないでください。少なくとも中学で3年間、多くのひとはそのあと高校で3年間はみっちり英語習ってきたでしょう。これくらいは読みましょう。
 
-まず上から見ていきましょう。「On branch master」 とありますね。「ブランチ master 上だよ」と言っています。ブランチについて説明していないので、いまはこれは無視してかまいません。
+まず上から見ていきましょう。「On branch main」 とありますね。「ブランチ main 上だよ」と言っています。ブランチについて説明していないので、いまはこれは無視してかまいません。
 
 そのあとに 「Initial commit」 と書かれていますね。「最初のコミットだよ」と書かれています。まだ一度もコミットしていないので、「この作業コピーをコミットするとこれが最初のコミットになるよ」って意味です。
 
@@ -93,7 +93,7 @@
 
 さて、さきほど `git status` を打ったときの出力ですが、もしかしたら、
 
-    # On branch master
+    # On branch main
     #
     # Initial commit
     #
@@ -133,7 +133,7 @@
 これで、「nyan.txtを track してね」と Git さんに伝える事ができました。ではここで再度 `git status` してみましょう。
 
     $ git status
-    # On branch master
+    # On branch main
     #
     # Initial commit
     #
@@ -160,7 +160,7 @@ Git では、コミットの前に、「作業ディレクトリ内のこのフ�
 はい、ではここでもう一度 `git status` で状態を見てみましょう
 
     $ git status
-    # On branch master
+    # On branch main
     #
     # Initial commit
     #
@@ -179,7 +179,7 @@ Git では、コミットの前に、「作業ディレクトリ内のこのフ�
     $ git add nyan.txt
     
     $ git status
-    # On branch master
+    # On branch main
     #
     # Initial commit
     #
@@ -219,7 +219,7 @@ Windowsを使ってるひとはどうすればいいのかって？ わたしも
 
     # Please enter the commit message for your changes. Lines starting
     # with '#' will be ignored, and an empty message aborts the commit.
-    # On branch master
+    # On branch main
     #
     # Initial commit
     #
@@ -260,7 +260,7 @@ Windowsを使ってるひとはどうすればいいのかって？ わたしも
 '#'から始まる行は無視される、とあるので、#から始めずに、「猫の鳴き声を管理するファイルを作成」というメッセージを書いて、保存、エディタを終了してみましょう。Macのエディタを開いてるひとは、ウィンドウを消すのではなくて、終了まで行う必要があります。言い方を変えれば、⌘+W ではなくて ⌘+Q です。
 
     $ git commit
-    [master (root-commit) 33028c1] 猫の鳴き声を管理するファイルを作成
+    [main (root-commit) 33028c1] 猫の鳴き声を管理するファイルを作成
      1 file changed, 1 insertion(+)
      create mode 100644 nyan.txt
 
