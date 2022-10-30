@@ -191,7 +191,7 @@ origin/main, origin/development, origin/HEAD というみっつのブランチ�
 
 さて、ゆうすけは今から作業を行うために、development ブランチからトピックブランチを切らなければなりません。なので、なにはともあれ手元に development ブランチが必要です。
 
-というわけで、**「origin/development」を追跡する development ブランチを、手元に作成しましょう。リモートブランチを追跡するブランチを作成するためには、 `git branch ＜手元のブランチの名前＞ ＜追跡したいリモートブランチの名前＞`です。**やってみましょう。
+というわけで、「origin/development」を追跡する development ブランチを、手元に作成しましょう。リモートブランチを追跡するブランチを作成するためには、 `git branch ＜手元のブランチの名前＞ ＜追跡したいリモートブランチの名前＞`です。やってみましょう。
 
     $ git branch development origin/development
     Branch development set up to track remote branch development from origin.
