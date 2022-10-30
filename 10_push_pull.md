@@ -13,7 +13,7 @@
 
 これはどういうことかと言うと、新しいブランチを「どこから」切るのかを指定したのです。
 
-おそらく、いまゆうすけであるあなたは master ブランチを選択していたでしょう。この状態で`git branch -b ＜新しく作るブランチの名前＞`とすると、master ブランチから分岐するブランチが切られます。しかし、`git branch -b ＜新しく作るブランチの名前＞ ＜分岐元＞`とすることで、明示的に「どこからブランチを分岐させるのか」を指定することができるのです。
+おそらく、いまゆうすけであるあなたは main ブランチを選択していたでしょう。この状態で`git branch -b ＜新しく作るブランチの名前＞`とすると、main ブランチから分岐するブランチが切られます。しかし、`git branch -b ＜新しく作るブランチの名前＞ ＜分岐元＞`とすることで、明示的に「どこからブランチを分岐させるのか」を指定することができるのです。
 
 さて、これで新しいフィーチャーブランチを切ってチェックアウトしたので、ここで作業を行いましょう。
 
@@ -46,7 +46,7 @@
 たかしの作業ディレクトリに移動し、マスターブランチから hotfix ブランチを切り、チェックアウトします。
 
     $ cd path/to/takashis_workspace
-    $ git checkout -b hotfix master
+    $ git checkout -b hotfix main
 
 そして緊急で「頭おかしい」を直しましょう。
 
@@ -105,34 +105,34 @@
 
 ## たかし、マージする
 
-さて、「みんなで触るリポジトリ」に hotfix ブランチを push したたかしは、ディレクターに「みんなで触るリポジトリのhotfixブランチの内容をチェックしてください。OK ならばマスターに merge して修正リリースとします」と説明しました。ディレクターはそれを聞いて内容をチェックして、「よし、OK」と OK を出しました。OK を出されたので、これを共有リポジトリの master にマージしたいですね。
+さて、「みんなで触るリポジトリ」に hotfix ブランチを push したたかしは、ディレクターに「みんなで触るリポジトリのhotfixブランチの内容をチェックしてください。OK ならばマスターに merge して修正リリースとします」と説明しました。ディレクターはそれを聞いて内容をチェックして、「よし、OK」と OK を出しました。OK を出されたので、これを共有リポジトリの main にマージしたいですね。
 
-しかし、共有リポジトリを直接いじることはできません。そういうときにはどうするのでしたか？ そうです、「追跡ブランチ」を変更すればいいのでしたね。今、共有リポジトリの master ブランチを追跡しているのは、手元の master ブランチです。
+しかし、共有リポジトリを直接いじることはできません。そういうときにはどうするのでしたか？ そうです、「追跡ブランチ」を変更すればいいのでしたね。今、共有リポジトリの main ブランチを追跡しているのは、手元の main ブランチです。
 
-では、hotfix の内容を手元の master ブランチに merge しましょう。これは簡単ですね。
+では、hotfix の内容を手元の main ブランチに merge しましょう。これは簡単ですね。
 
-    $ git checkout master
+    $ git checkout main
     $ git merge --no-ff hotfix
 
 です。では現在のグラフを確認しましょう。
 
 ```
 $ git graph
-*   38f43dc  (HEAD, master) 2013-05-07 Shinpei Maruyama Merge branch 'hotfix'
+*   38f43dc  (HEAD, main) 2013-05-07 Shinpei Maruyama Merge branch 'hotfix'
 |\
 | * 1d83043  (origin/hotfix, hotfix) 2013-05-07 Shinpei Maruyama 頭おかしいという表現はまずいので修正
 |/
-* a10bcb5  (origin/master, origin/development, development) 2013-05-07 Shinpei Maruyama 猫好きの話を追加
+* a10bcb5  (origin/main, origin/development, development) 2013-05-07 Shinpei Maruyama 猫好きの話を追加
 ```
 
-手元の master ブランチは、できたてのマージコミットを指しています。しかし、origin/master はまだこのマージコミットを指していませんね。それもそのはず、そもそもまだこのコミットはたかしの手元のリポジトリにしか存在しません。
+手元の main ブランチは、できたてのマージコミットを指しています。しかし、origin/main はまだこのマージコミットを指していませんね。それもそのはず、そもそもまだこのコミットはたかしの手元のリポジトリにしか存在しません。
 
 では、ここで `git status` を確認してみましょう。
 
 ```
 $ git status
-# On branch master
-# Your branch is ahead of 'origin/master' by 2 commits.
+# On branch main
+# Your branch is ahead of 'origin/main' by 2 commits.
 #   (use "git push" to publish your local commits)
 #
 nothing to commit, working directory clean
@@ -140,7 +140,7 @@ nothing to commit, working directory clean
 
 お、初めて見る表示が出てきました。なになに？
 
-「君のブランチは origin/master よりも 2 コミット進んでいるぜ！(もし君の手元のコミットを公開してしまいたければ、 git push するといいぜ！)」だそうです。また Git さんのキャラがブレていますが、Git さんのキャラがぶれてるときは筆者が疲れている証拠です。暖かく見守って下さい。
+「君のブランチは origin/main よりも 2 コミット進んでいるぜ！(もし君の手元のコミットを公開してしまいたければ、 git push するといいぜ！)」だそうです。また Git さんのキャラがブレていますが、Git さんのキャラがぶれてるときは筆者が疲れている証拠です。暖かく見守って下さい。
 
 ## たかし、push する
 
@@ -166,7 +166,7 @@ Counting objects: 1, done.
 Writing objects: 100% (1/1), 226 bytes, done.
 Total 1 (delta 0), reused 0 (delta 0)
 To ../shared_repo.git
-   a10bcb5..38f43dc  master -> master
+   a10bcb5..38f43dc  main -> main
 ```
 
 ヒャー！なんか warning が出た！
@@ -202,11 +202,11 @@ To ../shared_repo.git
 
 では、その下の表示も見てみましょう。
 
-3 行ログが表示されて、その下に、 shared_repo.git に対して master -> master したよ、と書かれています。うん、手元の master からリモートの master に変更が反映されたみたいですね！
+3 行ログが表示されて、その下に、 shared_repo.git に対して main -> main したよ、と書かれています。うん、手元の main からリモートの main に変更が反映されたみたいですね！
 
 ん？ちょっとまってください。現在は、git push は「matching」モードになっているはずです。ならば、development ブランチや hotfix ブランチもリモートに反映されないとおかしいのでは？
 
-そのとおりです。でも、よく考えてみると、development ブランチも hotfix ブランチも、手元とリモートの間に差異がありませんね。なので、Gitさんは、「じゃあ反映させるのは master ブランチだけでいいか」と判断して、masterブランチだけが反映されたのです。
+そのとおりです。でも、よく考えてみると、development ブランチも hotfix ブランチも、手元とリモートの間に差異がありませんね。なので、Gitさんは、「じゃあ反映させるのは main ブランチだけでいいか」と判断して、mainブランチだけが反映されたのです。
 
 と、今回 `git push` で行われた内容を一通り確認したところで、push.default の値をどちらに設定するか、決めておきましょう。まあ、ここは素直に新しいほうに合わせて simple に設定しておきましょう。こっちのほうが「あっやべ！ push しちゃいけないやつ push しちゃった！」みたいな事故にあわずに済みそうです。
 
@@ -214,18 +214,18 @@ To ../shared_repo.git
 
 ```
 $ git graph
-*   38f43dc  (HEAD, origin/master, master) 2013-05-07 Shinpei Maruyama Merge branch 'hotfix'
+*   38f43dc  (HEAD, origin/main, main) 2013-05-07 Shinpei Maruyama Merge branch 'hotfix'
 |\
 | * 1d83043  (origin/hotfix, hotfix) 2013-05-07 Shinpei Maruyama 頭おかしいという表現はまずいので修正
 |/
 * a10bcb5  (origin/development, development) 2013-05-07 Shinpei Maruyama 猫好きの話を追加
 ```
 
-うん、origin/master もマージコミットを指すようになりましたね。
+うん、origin/main もマージコミットを指すようになりましたね。
 
 ## たかし、あと始末をする
 
-さて、これで無事に共有リポジトリの master ブランチに緊急リリースのためのコミットが生まれました。さっさとリリースしてしまいましょう。
+さて、これで無事に共有リポジトリの main ブランチに緊急リリースのためのコミットが生まれました。さっさとリリースしてしまいましょう。
 
 無事にリリースされたそうです。では、あと始末をしましょう。今からやらなければならないのは大まかに以下の二つです。
 
@@ -252,12 +252,12 @@ $ git graph
 
 なにはともあれ、これで hotfix ブランチを手元でもリモートでも削除することに成功しました。
 
-では、次は、 hotfix で対応された内容が反映されている master を、 development に取り込みましょう。
+では、次は、 hotfix で対応された内容が反映されている main を、 development に取り込みましょう。
 
     $ git checkout development
-    $ git merge --no-ff master
+    $ git merge --no-ff main
 
-コミットメッセージは、なんのために master をマージしたのかわかりやすいように「緊急対応で行った修正をmaster から取り込む」くらいにしておきましょうか。
+コミットメッセージは、なんのために main をマージしたのかわかりやすいように「緊急対応で行った修正をmain から取り込む」くらいにしておきましょうか。
 
 はい、これで手元の development の準備ができましたね。それではここでリモートにこれを反映しましょう。
 
@@ -273,7 +273,7 @@ $ git graph
 $ cd path/to/yuusukes_workspace
 $ git graph
 * 3422d74  (HEAD, feature/unify_styles) 2013-05-07 Shinpei Maruyama 文体を統一
-* a10bcb5  (origin/master, origin/development, origin/HEAD, master, development) 2013-05-07 Shinpei Maruyama 猫好きの話を追加
+* a10bcb5  (origin/main, origin/development, origin/HEAD, main, development) 2013-05-07 Shinpei Maruyama 猫好きの話を追加
 ```
 
 ああ、そうでした。文体を統一する作業を終えて、手元のリポジトリにコミットしたところでしたね。では、この内容をディレクターにチェックしてもらうために、共有リポジトリに push しましょう。
@@ -307,7 +307,7 @@ remote: Total 5 (delta 3), reused 0 (delta 0)
 Unpacking objects: 100% (5/5), done.
 From /Users/shinpeim/shared_repo
    a10bcb5..c5e394e  development -> origin/development
-   a10bcb5..38f43dc  master     -> origin/master
+   a10bcb5..38f43dc  main     -> origin/main
 ```
 
 はい、これでリモートリポジトリの内容がコピーされてきました。リモートリポジトリのブランチは「リモートブランチ」としてコピーされてくるのでしたね。いいですか？
@@ -316,16 +316,16 @@ From /Users/shinpeim/shared_repo
 
 ```
 $ git graph
-*   c5e394e  (origin/development) 2013-05-07 Shinpei Maruyama 緊急対応で行った修正をmasterから取り込む
+*   c5e394e  (origin/development) 2013-05-07 Shinpei Maruyama 緊急対応で行った修正をmainから取り込む
 |\
-| *   38f43dc  (origin/master, origin/HEAD) 2013-05-07 Shinpei Maruyama Merge branch 'hotfix'
+| *   38f43dc  (origin/main, origin/HEAD) 2013-05-07 Shinpei Maruyama Merge branch 'hotfix'
 | |\
 |/ /
 | * 1d83043  2013-05-07 Shinpei Maruyama 頭おかしいという表現はまずいので修正
 |/
 | * 3422d74  (HEAD, origin/feature/unify_styles, feature/unify_styles) 2013-05-07 Shinpei Maruyama 文体を統一
 |/
-* a10bcb5  (master, development) 2013-05-07 Shinpei Maruyama 猫好きの話を追加
+* a10bcb5  (main, development) 2013-05-07 Shinpei Maruyama 猫好きの話を追加
 ```
 
 見事にリモートリポジトリのコミットとブランチが取り込まれています。
@@ -333,8 +333,8 @@ $ git graph
 さて、ここでリモートブランチと手元のブランチを比べてみてください。手元のブランチはリモートリポジトリよりもだいぶ「昔のコミット」を指しています。リモートで行われた変更を手元に反映させるために、手元のブランチもリモートブランチのところまで「進めて」しまいたいですね。そうです、「Fast-forward」したいのです。じゃあそうしましょう。
 
 ```
-$ git checkout master
-$ git merge origin/master
+$ git checkout main
+$ git merge origin/main
 $ git checkout development
 $ git merge origin/development
 ```
@@ -343,9 +343,9 @@ $ git merge origin/development
 
 ```
 $ git graph
-*   c5e394e  (HEAD, origin/development, development) 2013-05-07 Shinpei Maruyama 緊急対応で行った修正をmasterから取り込む
+*   c5e394e  (HEAD, origin/development, development) 2013-05-07 Shinpei Maruyama 緊急対応で行った修正をmainから取り込む
 |\
-| *   38f43dc  (origin/master, origin/HEAD, master) 2013-05-07 Shinpei Maruyama Merge branch 'hotfix'
+| *   38f43dc  (origin/main, origin/HEAD, main) 2013-05-07 Shinpei Maruyama Merge branch 'hotfix'
 | |\
 |/ /
 | * 1d83043  2013-05-07 Shinpei Maruyama 頭おかしいという表現はまずいので修正
@@ -369,9 +369,9 @@ $ git graph
 
 ```
 $ git graph
-*   c5e394e  (HEAD, origin/development, development) 2013-05-07 Shinpei Maruyama 緊急対応で行った修正をmasterから取り込む
+*   c5e394e  (HEAD, origin/development, development) 2013-05-07 Shinpei Maruyama 緊急対応で行った修正をmainから取り込む
 |\
-| *   38f43dc  (origin/master, origin/HEAD, master) 2013-05-07 Shinpei Maruyama Merge branch 'hotfix'
+| *   38f43dc  (origin/main, origin/HEAD, main) 2013-05-07 Shinpei Maruyama Merge branch 'hotfix'
 | |\
 |/ /
 | * 1d83043  2013-05-07 Shinpei Maruyama 頭おかしいという表現はまずいので修正
@@ -401,7 +401,7 @@ Oops！コンフリクトです。そういえば、hotfix でも unify_styles �
 
 はい、無事に push できました。おつかれさまでした！
 
-あとはレビューしてもらって、OK ならば master に反映して「新規リリースバージョン」をリリースすればいいですね！
+あとはレビューしてもらって、OK ならば main に反映して「新規リリースバージョン」をリリースすればいいですね！
 
 ## git push 落ち穂ひろい
 
@@ -431,7 +431,7 @@ Oops！コンフリクトです。そういえば、hotfix でも unify_styles �
 
 ## 最後に
 
-さて、このドキュメント自体も git リポジトリで管理されています。が、このリポジトリにはなんと master ブランチしか存在しません。ひどいですね。ただ、すこし言い訳をしておくと、あくまで Git は道具です。わたしは今回このドキュメントを書くにあたり、「ブランチは一本でいいや、なにか大きな改修を行うときになったらブランチを切ろう」というポリシーで書くことに決めました。今回、このドキュメントの中では、けっこうきちんとしたブランチ運用を見てみましたが、もちろん、全てのプロジェクトでこのような運用をする必要はありません。あるいは、もっときちんとした運用をするべきプロジェクトもあるでしょう。
+さて、このドキュメント自体も git リポジトリで管理されています。が、このリポジトリにはなんと main ブランチしか存在しません。ひどいですね。ただ、すこし言い訳をしておくと、あくまで Git は道具です。わたしは今回このドキュメントを書くにあたり、「ブランチは一本でいいや、なにか大きな改修を行うときになったらブランチを切ろう」というポリシーで書くことに決めました。今回、このドキュメントの中では、けっこうきちんとしたブランチ運用を見てみましたが、もちろん、全てのプロジェクトでこのような運用をする必要はありません。あるいは、もっときちんとした運用をするべきプロジェクトもあるでしょう。
 
 大切なのは、ベストプラクティスを知っていて、必要な場所で必要なときにいつでも使えるようになることです。あるひとつのやり方に固執する必要はありません。そのときに一番良いやりかたを選択していきましょう(もちろん、ベストプラクティスは「ベスト」だからベストプラクティスと呼ばれるわけで、基本的にはベストプラクティスに従うのが良いでしょう)。
 
