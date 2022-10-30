@@ -38,7 +38,7 @@
     $ git status
     # On branch master
     # Changes to be committed:
-    #   (use "git reset HEAD <file>..." to unstage)
+    #   (use "git restore --staged <file>..." to unstage)
     #
     #	new file:   boo.txt
     #	new file:   wan.txt
@@ -105,7 +105,7 @@
     # On branch master
     # Changes not staged for commit:
     #   (use "git add/rm <file>..." to update what will be committed)
-    #   (use "git checkout -- <file>..." to discard changes in working directory)
+    #   (use "git restore <file>..." to discard changes in working directory)
     #
     #	deleted:    boo.txt
     #
@@ -188,7 +188,7 @@
     $ git status
     # On branch master
     # Changes to be committed:
-    #   (use "git reset HEAD <file>..." to unstage)
+    #   (use "git restore --staged <file>..." to unstage)
     #
     #	deleted:    boo.txt
     #
@@ -291,7 +291,7 @@ nyan.txt は名前がかわり、mew.txt になりました。これは、別の
 
 おー。staging areaに、renamed: として「wan.txt -> bow.txt」「nayn.txt -> mew.txt」が登録されました。Hooray！
 
-ちなみに、`git rm` では作業ディレクトリからのファイルを削除と、その変更内容の staging を一気に行うことができましたが、リネームのときにはできないのでしょうか？ 実は、リネームのときには、`git mv ＜リネーム前のファイルの名前＞ ＜リネーム後のファイルの名前＞` とすることでこれを一気に行えます。今回ならば、
+ちなみに、`git rm` では作業ディレクトリからのファイルを削除と、その変更内容の staging を一気に行うことができましたが、リネームのときにはできないのでしょうか？ *実は、リネームのときには、`git mv ＜リネーム前のファイルの名前＞ ＜リネーム後のファイルの名前＞` とすることでこれを一気に行えます。*今回ならば、
 
     $ git mv nyan.txt mew.txt
     $ git mv wan.txt bow.txt
@@ -364,7 +364,7 @@ nyan.txt は名前がかわり、mew.txt になりました。これは、別の
     
 はい、もう怖くないですね。ファイルの移動というのはファイルのリネームと同じく、「新しい場所に同じ内容のファイルを作成して、古いファイルは消す」のと一緒です。なので bow.txt と mew.txt が「削除されてるけどその変更は stage されてないよ」と表示され、新しく作られた "animals/" ディレクトリが「あたらしくディレクトリできてるけどこれ知らないディレクトリだよ」と言われています。
 
-では新しいディレクトリを `git add` で stage して、ファイルの削除を `git rm` で stage しましょう。`git add` にディレクトリを指定すると「その中のファイル全部」を意味することを思い出してください。
+では新しいディレクトリを `git add` で stage して、ファイルの削除を `git rm` で stage しましょう。*`git add` にディレクトリを指定すると「その中のファイル全部」を意味する*ことを思い出してください。
 
     $ git add animals
 
@@ -443,7 +443,7 @@ nyan.txt は名前がかわり、mew.txt になりました。これは、別の
 まとめましょう。
 
 * 「ファイルのリネーム、移動」は、実質は「新しい場所(名前)に同じ内容のファイルを作って、古い場所にあるファイルを消す」という動作である。
-* なので、ファイルをリネーム/移動 した場合は、「新しくファイルができたよ」という情報を `git add` で stage、「古いファイルは消えたよ」という情報を `git rm` で stage することでリネーム/削除が表現できる。
+* なので、ファイルをリネーム/移動 した場合は、「新しくファイルができたよ」という情報を `git add` で stage、「古いファイルは消えたよ」という情報を `git rm` で stage することでリネーム/削除が表現できる。どちらもファイル名のみでOK。
 * `git mv` を使うと、「作業ディレクトリ内のファイルのリネーム/移動」と、「その変更を stage」を一気にやってくれる
 
 ちなみに、`git mv` の mv は move の略です。
