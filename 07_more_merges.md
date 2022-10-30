@@ -595,19 +595,18 @@ Conflicts:
         cat_lover_said.txt
 #
 # It looks like you may be committing a merge.
-# If this is not correct, please remove the file
-#       .git/MERGE_HEAD
+# If this is not correct, please run
+#       git update-ref -d MERGE_HEAD
 # and try again.
 
 
 # Please enter the commit message for your changes. Lines starting
 # with '#' will be ignored, and an empty message aborts the commit.
+#
 # On branch main
 # All conflicts fixed but you are still merging.
-#   (use "git commit" to conclude merge)
 #
 # Changes to be committed:
-#
 #       modified:   cat_hater_said.txt
 #       modified:   cat_lover_said.txt
 #
