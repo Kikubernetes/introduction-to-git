@@ -44,21 +44,21 @@
 
 さて、準備はいいですね。では、まずは今回のブランチの運用のポリシーを決めましょう。
 
-まず、masterブランチですが、master ブランチにコミットするものは「リリースするもの」だけ、ということにしましょう。開発途中のものをコミットするのは、「development」というブランチにします。そして、作業は development からトピックブランチを切って行います。
+まず、mainブランチですが、main ブランチにコミットするものは「リリースするもの」だけ、ということにしましょう。開発途中のものをコミットするのは、「development」というブランチにします。そして、作業は development からトピックブランチを切って行います。
 
-言い方を変えると、なにか作業をするときには development ブランチから topic ブランチを切って行います。そして、その作業が終わったら、develop ブランチでそのトピックブランチを merge します。これを繰り返して、development ブランチの状態が「リリースできるもの」になったら、master ブランチから development ブランチを merge します。
+言い方を変えると、なにか作業をするときには development ブランチから topic ブランチを切って行います。そして、その作業が終わったら、develop ブランチでそのトピックブランチを merge します。これを繰り返して、development ブランチの状態が「リリースできるもの」になったら、main ブランチから development ブランチを merge します。
 
 こうすることによって、
 
-* master が指してるコミットは、必ず 「最新のリリース」 である
+* main が指してるコミットは、必ず 「最新のリリース」 である
 * development が指しているコミットは、「最新の開発版」である
 * 各トピックブランチが指しているコミットは、「作業途中の状態」である
 
-ということが保証されます。なんか便利な気がしますね。ディレクターから「今の最新版チェックしたいから見せて」と言われたら、「自分で development ブランチ見ろや」って言えますし、ユーザーから不具合報告が来たら、master ブランチの内容を精査すればいいのです。
+ということが保証されます。なんか便利な気がしますね。ディレクターから「今の最新版チェックしたいから見せて」と言われたら、「自分で development ブランチ見ろや」って言えますし、ユーザーから不具合報告が来たら、main ブランチの内容を精査すればいいのです。
 
-それともうひとつ、すでにリリースしてしまったものに不具合が見つかったときにそれを緊急で修正しなければならないときには、master ブランチから hotfix ブランチを切って、ここで修正した内容を master ブランチに merge することにしましょう。これで、開発中のものを急いでリリースせずに、緊急の対応だけは先にリリース版に組み込みことができますね。
+それともうひとつ、すでにリリースしてしまったものに不具合が見つかったときにそれを緊急で修正しなければならないときには、main ブランチから hotfix ブランチを切って、ここで修正した内容を main ブランチに merge することにしましょう。これで、開発中のものを急いでリリースせずに、緊急の対応だけは先にリリース版に組み込みことができますね。
 
-そして、この緊急対応が無事にリリースされたなら、hotfix が取り込まれた master ブランチを development にマージすることにしましょう。このように運用することで、開発版にも、リリース版での修正を反映することができます。
+そして、この緊急対応が無事にリリースされたなら、hotfix が取り込まれた main ブランチを development にマージすることにしましょう。このように運用することで、開発版にも、リリース版での修正を反映することができます。
 
 では、このような開発を進めるために、たかしくんであるあなたは、まずは development ブランチを作っておきましょう。
 
@@ -74,7 +74,7 @@
 
 なので、ふたりが共通でさわるリポジトリを作ってしまいましょう。それぞれ、自分のリポジトリで行った変更をこの共通のリポジトリに反映させたり、相手が行った変更をこの共通のリポジトリから取ってきたりする、という運用でいきます。
 
-<img src="https://raw.github.com/Shinpeim/introduction-to-git/master/images/09_00.png" alt="みんなで触るリポジトリーのイメージ" width="400">
+<img src="https://raw.github.com/Shinpeim/introduction-to-git/main/images/09_00.png" alt="みんなで触るリポジトリーのイメージ" width="400">
 
 では、なにはともあれ「みんなで触るリポジトリ」が必要ですね。この「みんなで触るリポジトリ」は、「たかしのリポジトリ」から複製してしまいましょう。リポジトリの複製は、`git clone ＜複製元＞ ＜複製される先＞` です。 takashis_workspace ディレクトリから出て、
 
@@ -126,12 +126,12 @@ done.
 作業を行うには、development ブランチからトピックブランチを切るのでしたね。ちゃんと手元に development ブランチが複製されてきてるか、`git branch` で確認しましょう。
 
     $ git branch
-    * master
+    * main
     
 ！？ developmentブランチがないぞ！？ グラフも確認しましょう。
 
     $ git graph
-    * 253585d  (HEAD, origin/master, origin/development, origin/HEAD, master) 2013-05-07 TAKASHI 猫好きの話を追加
+    * 253585d  (HEAD -> origin/main, origin/development, origin/HEAD -> main) 2013-05-07 TAKASHI 猫好きの話を追加
 
 なんか知らないのたくさんある！怖い！！
 
@@ -165,11 +165,11 @@ done.
 それでは、それを念頭においてから、先ほどの graph の結果を眺めてみましょう。
 
     $ git graph
-    * 253585d  (HEAD, origin/master, origin/development, origin/HEAD, master) 2013-05-07 TAKASHI 猫好きの話を追加
+    * 253585d  (HEAD -> origin/main, origin/development, origin/HEAD -> main) 2013-05-07 TAKASHI 猫好きの話を追加
 
-origin/master, origin/development, origin/HEAD というみっつのブランチがありますね。これらはそれぞれ、「origin リモートリポジトリ(つまり clone 元)の master ブランチ」「origin リモートリポジトリの development ブランチ」「origin リモートリポジトリのHEAD」を表しています。`git clone` をすると、クローン元に存在するコミットとブランチを、手元に複製してきます。このとき、ブランチは「リモートブランチ」としてコピーされてきます。リモートリポジトリからコピーされてきたブランチなので、「リモートブランチ」です。
+origin/main, origin/development, origin/HEAD というみっつのブランチがありますね。これらはそれぞれ、「origin リモートリポジトリ(つまり clone 元)の main ブランチ」「origin リモートリポジトリの development ブランチ」「origin リモートリポジトリのHEAD」を表しています。`git clone` をすると、クローン元に存在するコミットとブランチを、手元に複製してきます。このとき、ブランチは「リモートブランチ」としてコピーされてきます。リモートリポジトリからコピーされてきたブランチなので、「リモートブランチ」です。
 
-今は、手元に master ブランチと、clone 元から複製されてきた三つの「リモートブランチ」が存在している状態です。
+今は、手元に main ブランチと、clone 元から複製されてきた三つの「リモートブランチ」が存在している状態です。
 
 これらのリモートブランチは、もともと「自分の物」ではありません。「みんなのもの」です。なので、このリモートブランチを選択して作業をすることはできません。では、リモートリポジトリに内容を反映させたいような変更を手元で行うためには、どうすればいいのでしょうか？
 
@@ -200,9 +200,9 @@ origin/master, origin/development, origin/HEAD というみっつのブランチ
 
 これで、ゆうすけは手元の development ブランチで行った反映を origin の development ブランチに反映したり、その逆に origin の development ブランチで行われた変更を自分の development ブランチに適用することができるようになりました。
 
-ところで、さきほど `git clone` してきたときに、すでに手元に master ブランチが存在していましたね？ これはどういうことでしょうか。
+ところで、さきほど `git clone` してきたときに、すでに手元に main ブランチが存在していましたね？ これはどういうことでしょうか。
 
-git clone を行ったとき、まずはクローン元のリポジトリに存在するコミットとブランチが手元に複製されるのは上で見た通りです。じつは、Git さんはそのあと、origin/master ブランチを追跡する master ブランチを勝手に手元に作成してくれて、さらに作業ディレクトリ内にこの master ブランチを checkout するところまで自動でやってくれていたのです。
+git clone を行ったとき、まずはクローン元のリポジトリに存在するコミットとブランチが手元に複製されるのは上で見た通りです。じつは、Git さんはそのあと、origin/main ブランチを追跡する main ブランチを勝手に手元に作成してくれて、さらに作業ディレクトリ内にこの main ブランチを checkout するところまで自動でやってくれていたのです。
 
 なるほどねー。
 
@@ -234,7 +234,7 @@ origin
 
 ```
 $ git graph
-* a10bcb5  (HEAD, master, development) 2013-05-07 Shinpei Maruyama 猫好きの話を追加
+* a10bcb5  (HEAD -> main, development) 2013-05-07 Shinpei Maruyama 猫好きの話を追加
 ```
 
 アレッ！？ origin/* ブランチがないですね！？
@@ -247,21 +247,21 @@ $ git graph
 $ git fetch origin
 From path/to/shared_repo
  * [new branch]      development -> origin/development
- * [new branch]      master     -> origin/master
+ * [new branch]      main     -> origin/main
 ```
 
 ふたつの新しいブランチが生まれていますね。矢印の左側が「リモートリポジトリでのブランチの名前」、矢印の右側が「手元にコピーされたリモートブランチ」です。
 
 さて、これで準備は OK でしょうか？
 
-じつは、まだ準備は万端ではありません。今、たかしの手元には development ブランチと master ブランチが存在していますが、このブランチがそれぞれ origin/development と origin/master を追跡するようにしないと、手元で行った変更が origin/development や origin/master に反映されませんね。なので、次は手元の master, development がそれぞれ origin/master, origin/development を追跡するように設定しましょう。
+じつは、まだ準備は万端ではありません。今、たかしの手元には development ブランチと main ブランチが存在していますが、このブランチがそれぞれ origin/development と origin/main を追跡するようにしないと、手元で行った変更が origin/development や origin/main に反映されませんね。なので、次は手元の main, development がそれぞれ origin/main, origin/development を追跡するように設定しましょう。
 
 そのためには、"git branch --set-upstream-to=＜追跡したいリモートブランチ＞ ＜手元のブランチ＞" というコマンドを利用します。
 
 ではやってみましょう。
 
-    $ git branch --set-upstream-to=origin/master master
-    Branch master set up to track remote branch master from origin.
+    $ git branch --set-upstream-to=origin/main main
+    Branch main set up to track remote branch main from origin.
     
     $ git branch --set-upstream-to=origin/development development
     Branch development set up to track remote branch development from origin.
