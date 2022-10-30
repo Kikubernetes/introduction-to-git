@@ -79,13 +79,13 @@ Git 運用のコツとして、なにか変更を行うときにはブランチ�
 念のため今の状態を確認しておきましょう。
 
     $ git graph
-    * 8efecbd  (HEAD, unify_styles, master) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
+    * 8efecbd  (HEAD, unify_styles, main) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
     
     $ git branch
-      master
+      main
     * unify_styles
 
-はい。最初のコミットがあって、unify_styles ブランチも master ブランチもそのコミットを指していますね。 `git branch` の結果を見ると、きちんと unify_styles が選択されています。
+はい。最初のコミットがあって、unify_styles ブランチも main ブランチもそのコミットを指していますね。 `git branch` の結果を見ると、きちんと unify_styles が選択されています。
 
 では、ここで文体を直して行きましょう。直した結果は下のようになりました。
 
@@ -140,7 +140,7 @@ Git 運用のコツとして、なにか変更を行うときにはブランチ�
 ```
 $ git graph
 * ff00bb6  (HEAD, unify_styles) 2013-05-06 Shinpei Maruyama 文体を統一
-* 8efecbd  (master) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
+* 8efecbd  (main) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
 ```
 
 うん、いいですね。新しいコミットが作られ、unify_styles ブランチはその新しいコミットを指しています。
@@ -158,26 +158,26 @@ VCS を使っていなければ「えー前の状態に戻してからまた別�
 ```
 $ git graph
 * ff00bb6  (HEAD, unify_styles) 2013-05-06 Shinpei Maruyama 文体を統一
-* 8efecbd  (master) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
+* 8efecbd  (main) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
 ```
 
-masterのところを復元して、そこから編集をすればよさそうですね。やりましょう。
+mainのところを復元して、そこから編集をすればよさそうですね。やりましょう。
 
 ```
-$ git checkout master
+$ git checkout main
 ```
 
-これで master が指すコミットの状態が作業ディレクトリ内に復元され、HEAD が 指すブランチが master になったはずです。確認しましょう。まずはファイルを開いて、ファイルの中身が復元されていることを確認してください。
+これで main が指すコミットの状態が作業ディレクトリ内に復元され、HEAD が 指すブランチが main になったはずです。確認しましょう。まずはファイルを開いて、ファイルの中身が復元されていることを確認してください。
 
 確認しましたか？ きちんと復元されていますね。では今度は graph の確認です。
 
 ```
 $ git graph
 * ff00bb6  (unify_styles) 2013-05-06 Shinpei Maruyama 文体を統一
-* 8efecbd  (HEAD, master) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
+* 8efecbd  (HEAD, main) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
 ```
 
-HEAD が masterを指している(= masterブランチが選択されている)のが確認できました。
+HEAD が mainを指している(= mainブランチが選択されている)のが確認できました。
 
 ではここから、緊急の作業のためのブランチを切ってそこに移動しましょう。名前は hotfix にしましょうか。今までは
 
@@ -197,7 +197,7 @@ $ git checkout -b hotfix
 ```
 $ git branch
 * hotfix
-  master
+  main
   unify_styles
 ```
 
@@ -206,10 +206,10 @@ hotfixができていて、選択されていますね。graph も確認しま�
 ```
 $ git graph
 * ff00bb6  (unify_styles) 2013-05-06 Shinpei Maruyama 文体を統一
-* 8efecbd  (HEAD, master, hotfix) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
+* 8efecbd  (HEAD, main, hotfix) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
 ```
 
-hotfix は master と同じコミットを指していますね。
+hotfix は main と同じコミットを指していますね。
 
 では、この hotfix 上で緊急の編集を行いましょう。
 
@@ -225,19 +225,19 @@ hotfix は master と同じコミットを指していますね。
 * 5f26eb2  (HEAD, hotfix) 2013-05-06 Shinpei Maruyama 頭がおかしいという表現はまずいので修正
 | * ff00bb6  (unify_styles) 2013-05-06 Shinpei Maruyama 文体を統一
 |/  
-* 8efecbd  (master) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
+* 8efecbd  (main) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
 ```
 
 はい、いいですね。文体を統一するための変更とは別のルートに、緊急対応で "頭がおかしい" という表現を直した状態のファイルがコミットできました。
 
-さて、できあがったので、あなたはこのブランチでの変更内容をディレクターに見せに行きました。「OK!それでリリースしちゃって！」との言葉をもらったので、この hotfix ブランチで行った変更をリリースするために、master ブランチに取り込みましょう。
+さて、できあがったので、あなたはこのブランチでの変更内容をディレクターに見せに行きました。「OK!それでリリースしちゃって！」との言葉をもらったので、この hotfix ブランチで行った変更をリリースするために、main ブランチに取り込みましょう。
 
 ## hotfixをマージしよう
 
-あるブランチで行った変更を別のブランチに取り込むためには、 merge でしたね。今回は、master ブランチに hotfix ブランチの内容を取り込みたいので、 master ブランチから merge を行いましょう。
+あるブランチで行った変更を別のブランチに取り込むためには、 merge でしたね。今回は、main ブランチに hotfix ブランチの内容を取り込みたいので、 main ブランチから merge を行いましょう。
 
 ```
-$ git checkout master
+$ git checkout main
 $ git merge hotfix
 Updating 8efecbd..5f26eb2
 Fast-forward
@@ -250,7 +250,7 @@ Fast-forward
 
 ```
 $ git graph
-* 5f26eb2  (HEAD, master, hotfix) 2013-05-06 Shinpei Maruyama 頭がおかしいという表現はまずいので修正
+* 5f26eb2  (HEAD, main, hotfix) 2013-05-06 Shinpei Maruyama 頭がおかしいという表現はまずいので修正
 | * ff00bb6  (unify_styles) 2013-05-06 Shinpei Maruyama 文体を統一
 |/  
 * 8efecbd  2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
@@ -258,11 +258,11 @@ $ git graph
 
 ！？ マージコミットが作成されていません。なんだこれは！？
 
-でも、よく見てみてください。master ブランチが指すコミットが、先ほどまでと変わっているのがわかりますか？
+でも、よく見てみてください。main ブランチが指すコミットが、先ほどまでと変わっているのがわかりますか？
 
-merge する前は、「猫好きの話と犬好きの話を作成」のコミットを指していた master ブランチが、今は hotfix と同じコミットを指しています。なぜこんなことがおこったのでしょうか。
+merge する前は、「猫好きの話と犬好きの話を作成」のコミットを指していた main ブランチが、今は hotfix と同じコミットを指しています。なぜこんなことがおこったのでしょうか。
 
-それを理解するために、今はマージの登場人物である hotfix ブランチと master ブランチだけに注目して見てみましょう。
+それを理解するために、今はマージの登場人物である hotfix ブランチと main ブランチだけに注目して見てみましょう。
 
 merge を行う前のグラフを再度見てみましょう。
 
@@ -270,7 +270,7 @@ merge を行う前のグラフを再度見てみましょう。
 * 5f26eb2  (HEAD, hotfix) 2013-05-06 Shinpei Maruyama 頭がおかしいという表現はまずいので修正
 | * ff00bb6  (unify_styles) 2013-05-06 Shinpei Maruyama 文体を統一
 |/  
-* 8efecbd  (master) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
+* 8efecbd  (main) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
 ```
 
 でしたね。今回のマージには関係のない unify_styles を無視してこのグラフを見てみましょう。
@@ -278,16 +278,16 @@ merge を行う前のグラフを再度見てみましょう。
 ```
 * 5f26eb2  (HEAD, hotfix) 2013-05-06 Shinpei Maruyama 頭がおかしいという表現はまずいので修正
 |  
-* 8efecbd  (master) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
+* 8efecbd  (main) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
 ```
 
-となっています。このグラフ、一本道で、「分岐」してませんね。さて、このとき、master ブランチが hotfix ブランチの変更内容を取り込もうと思った場合、一番楽な方法はなんでしょうか。単純に master ブランチを hotfix と同じところを指すようにしてしまえば、それで master ブランチに hotfix ブランチの変更内容を反映したのと同じことになりますね。そういうとき、賢い Git さんは「じゃあそれでええやん」という感じで単純に master のブランチを hotfix と同じところまで進めるのです。で、こういう merge の仕方を「Fast-forward」と呼んでいるのです。
+となっています。このグラフ、一本道で、「分岐」してませんね。さて、このとき、main ブランチが hotfix ブランチの変更内容を取り込もうと思った場合、一番楽な方法はなんでしょうか。単純に main ブランチを hotfix と同じところを指すようにしてしまえば、それで main ブランチに hotfix ブランチの変更内容を反映したのと同じことになりますね。そういうとき、賢い Git さんは「じゃあそれでええやん」という感じで単純に main のブランチを hotfix と同じところまで進めるのです。で、こういう merge の仕方を「Fast-forward」と呼んでいるのです。
 
 へー。
 
 これはこれで便利なのですが、わたしはこの挙動があまり気に入りません。だって、このログからは「このタイミングで hotfix ブランチをマージしたよ」という情報が消えてしまっています。マージ作業だって立派な「変更履歴」なのに、それがログに残らないのは気分が悪いです。Fast-forward なんてよけいなお世話だ！というわけで、Fast-forward できるときにも Fast-forward せず、いつもどおりマージコミットを作成することはできないのでしょうか？じつはできるのです。実際にやってみましょう。
 
-おっと、でも、そのためには、さっきの merge で hotfix と同じところまで進んでしまった master ブランチを、元の位置に戻さないとだめですね。 `git reset --hard ＜戻りたいコミットのid＞` というコマンドで、今選択しているブランチをそこまで戻し、作業ディレクトリ内にそのときの状態が復元することができます。今回なら、"8efecbd" のコミットに戻りたいので、それを指定しましょう。
+おっと、でも、そのためには、さっきの merge で hotfix と同じところまで進んでしまった main ブランチを、元の位置に戻さないとだめですね。 `git reset --hard ＜戻りたいコミットのid＞` というコマンドで、今選択しているブランチをそこまで戻し、作業ディレクトリ内にそのときの状態が復元することができます。今回なら、"8efecbd" のコミットに戻りたいので、それを指定しましょう。
 
     $ git reset --hard 8efecbd
     HEAD is now at 8efecbd 猫好きの話と犬好きの話を作成
@@ -299,10 +299,10 @@ $ git graph
 * 5f26eb2  (hotfix) 2013-05-06 Shinpei Maruyama 頭がおかしいという表現はまずいので修正
 | * ff00bb6  (unify_styles) 2013-05-06 Shinpei Maruyama 文体を統一
 |/  
-* 8efecbd  (HEAD, master) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
+* 8efecbd  (HEAD, main) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
 ```
 
-うん、いいですね。master の位置がもとに戻っています。念のため、ファイルの内容ももどに戻っていることを確認してください。いいですね？
+うん、いいですね。main の位置がもとに戻っています。念のため、ファイルの内容ももどに戻っていることを確認してください。いいですね？
 
 では、今度はここから「Fast-forward」にならないようにマージをしてみましょう。そのためには `git merge` に `--no-ff` というオプションを指定します。
 
@@ -322,7 +322,7 @@ Merge made by the 'recursive' strategy.
 うん、'recursive' stragy でマージされてますね。グラフも確認しましょう。
 
 ```
-*   7090c03  (HEAD, master) 2013-05-06 Shinpei Maruyama Merge branch 'hotfix'
+*   7090c03  (HEAD, main) 2013-05-06 Shinpei Maruyama Merge branch 'hotfix'
 |\  
 | * 5f26eb2  (hotfix) 2013-05-06 Shinpei Maruyama 頭がおかしいという表現はまずいので修正
 |/  
@@ -339,7 +339,7 @@ hotfix ブランチはもう用無しなので消しちゃいましょう。
 $ git branch -d hotfix
 ```
 
-さて、これで master ブランチの内容をリリースしてしまいましょう。一安心ですね。
+さて、これで main ブランチの内容をリリースしてしまいましょう。一安心ですね。
 
 ところで、今回は Fast-fowarding せずにマージコミットを作る方式でマージを行いましたが、Fast-foward できるときは Fast-foward してしまうほうが好みであるというひともいます。このあたりは現在でも活発に宗教戦争が起こっているので、あなたの所属する組織やプロジェクトのやり方に合わせるといいでしょう。
 
@@ -380,7 +380,7 @@ $ git branch -d hotfix
 ```
 $ git graph
 * ddfdb5f  (HEAD, unify_styles) 2013-05-06 Shinpei Maruyama "ヘッヘッヘッヘッ" という表現は残すようにした
-| *   7090c03  (master) 2013-05-06 Shinpei Maruyama Merge branch 'hotfix'
+| *   7090c03  (main) 2013-05-06 Shinpei Maruyama Merge branch 'hotfix'
 | |\  
 | | * 5f26eb2  2013-05-06 Shinpei Maruyama 頭がおかしいという表現はまずいので修正
 | |/  
@@ -391,14 +391,14 @@ $ git graph
 
 問題ないですね？
 
-ではこのコミットの内容をディレクターに見てもらいましょう。見てもらったら、「OK」と言われました。ではこのブランチの編集内容をリリースするために、 master に反映させましょう！
+ではこのコミットの内容をディレクターに見てもらいましょう。見てもらったら、「OK」と言われました。ではこのブランチの編集内容をリリースするために、 main に反映させましょう！
 
 ## 文体統一のためのブランチをマージしよう
 
-ブランチA の内容をブランチ B に反映させるには、ブランチ B を選択して、ブランチ A を merge ですね。今回は unify_styles を master に merge なので、「masterを選択して、unify_styles をマージ」です。
+ブランチA の内容をブランチ B に反映させるには、ブランチ B を選択して、ブランチ A を merge ですね。今回は unify_styles を main に merge なので、「mainを選択して、unify_styles をマージ」です。
 
 ```
-$ git checkout master
+$ git checkout main
 $ git merge unify_styles
 Auto-merging cat_lover_said.txt
 CONFLICT (content): Merge conflict in cat_lover_said.txt
@@ -421,7 +421,7 @@ Automatic merge failed; fix conflicts and then commit the result.
 
 ```
 $ git status
-# On branch master
+# On branch main
 # You have unmerged paths.
 #   (fix conflicts and run "git commit")
 #
@@ -479,7 +479,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 
     =======
 
-までは、「HEAD」で編集された内容です。今回は HEAD は master でしたね。master は hotfix の 内容を取り込んでいたので、hotfix のほうにあった内容「猫好きな人間がいるのが不思議。」がここに書かれています。
+までは、「HEAD」で編集された内容です。今回は HEAD は main でしたね。main は hotfix の 内容を取り込んでいたので、hotfix のほうにあった内容「猫好きな人間がいるのが不思議。」がここに書かれています。
 
 一方、
 
@@ -523,7 +523,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 
 ```
 $ git status
-# On branch master
+# On branch main
 # You have unmerged paths.
 #   (fix conflicts and run "git commit")
 #
@@ -566,7 +566,7 @@ $ git add cat_lover_said.txt
 
 ```
 $ git status
-# On branch master
+# On branch main
 # All conflicts fixed but you are still merging.
 #   (use "git commit" to conclude merge)
 #
@@ -602,7 +602,7 @@ Conflicts:
 
 # Please enter the commit message for your changes. Lines starting
 # with '#' will be ignored, and an empty message aborts the commit.
-# On branch master
+# On branch main
 # All conflicts fixed but you are still merging.
 #   (use "git commit" to conclude merge)
 #
@@ -644,7 +644,7 @@ unify_stylesをマージします。
 
 ```
 $ git graph
-*   16fa3b3  (HEAD, master) 2013-05-06 Shinpei Maruyama Merge branch 'unify_styles'
+*   16fa3b3  (HEAD, main) 2013-05-06 Shinpei Maruyama Merge branch 'unify_styles'
 |\  
 | * ddfdb5f  (unify_styles) 2013-05-06 Shinpei Maruyama "ヘッヘッヘッヘッ" という表現は残すようにした
 * |   7090c03  2013-05-06 Shinpei Maruyama Merge branch 'hotfix'
@@ -658,11 +658,11 @@ $ git graph
 
 無事にマージコミットが作成されていますね！！いい感じです！
 
-これで無事 unify_styles ブランチで行った変更も master ブランチに取り込まれたので、unify_stylesブランチは消してしまいましょう。
+これで無事 unify_styles ブランチで行った変更も main ブランチに取り込まれたので、unify_stylesブランチは消してしまいましょう。
 
     $ git branch -d unify_styles
     
-そして、すべての変更が反映されている master ブランチを、このままリリースしてしまいましょう。おつかれさまでした！！
+そして、すべての変更が反映されている main ブランチを、このままリリースしてしまいましょう。おつかれさまでした！！
 
 今回のまとめです。
 
