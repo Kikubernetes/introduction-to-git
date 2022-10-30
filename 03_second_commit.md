@@ -29,7 +29,7 @@
     # On branch master
     # Changes not staged for commit:
     #   (use "git add <file>..." to update what will be committed)
-    #   (use "git checkout -- <file>..." to discard changes in working directory)
+    #   (use "git restore <file>..." to discard changes in working directory)
     #
     #	modified:   nyan.txt
     #
@@ -43,13 +43,13 @@
 
 「use "git add \<file\>..." to update what will be committed」。「"git add \<file\> ..." すると コミットされるようになるよ」とのこと。untracked なファイルを track するときと一緒ですね。こんな感じで、 編集したり新しくできたりしたファイルを `git add` で staging area に登録することができます。
 
-もうひとつのほうの括弧の中も見てみましょう。「use "git checkout -- \<file\>..." to discard changes in working directory」だそうです。「"git checkout -- \<file\> ..." すると、作業ディレクトリ内での変更をなかったことにできるよ！」だそうです。
+もうひとつのほうの括弧の中も見てみましょう。「use "git restore \<file\>..." to discard changes in working directory」だそうです。「"git restore \<file\> ..." すると、作業ディレクトリ内での変更をなかったことにできるよ！」だそうです。
 
 へえー。
 
 じゃあやってみましょう。
 
-    $ git checkout -- nyan.txt
+    $ git restore nyan.txt
 
 としたあとに、nyan.txt の中身を見てみてください。 
 
@@ -73,7 +73,7 @@
     # On branch master
     # Changes not staged for commit:
     #   (use "git add <file>..." to update what will be committed)
-    #   (use "git checkout -- <file>..." to discard changes in working directory)
+    #   (use "git restore <file>..." to discard changes in working directory)
     #
     #	modified:   nyan.txt
     #
@@ -88,20 +88,20 @@
     $ git status
     # On branch master
     # Changes to be committed:
-    #   (use "git reset HEAD <file>..." to unstage)
+    #   (use "git restore --staged <file>..." to unstage)
     #
     #	modified:   nyan.txt
     #
 
 はい、新しい表示が出てきました
 
-「Changes to be committed、括弧でごにょごにょ、 modified: nyan.txt」だそうです。「コミットされる変更は以下の通りだよ。変更されたファイル：nyan.txt」でいいですね。括弧の中は「use "git reset HEAD \<file\>..." to unstage」とあります。「"git reset HEAD \<file\> ..." ってやるとunstageできるよ」ってことですね。
+「Changes to be committed、括弧でごにょごにょ、 modified: nyan.txt」だそうです。「コミットされる変更は以下の通りだよ。変更されたファイル：nyan.txt」でいいですね。括弧の中は「use "git restore --staged \<file\>..." to unstage」とあります。「"git restore --staged \<file\> ..." ってやるとunstageできるよ」ってことですね。
 
 へー。
 
 試しにやってみましょう。
 
-    $ git reset HEAD nyan.txt
+    $ git restore --staged nyan.txt
     Unstaged changes after reset:
     M	nyan.txt
 
@@ -113,7 +113,7 @@
     # On branch master
     # Changes not staged for commit:
     #   (use "git add <file>..." to update what will be committed)
-    #   (use "git checkout -- <file>..." to discard changes in working directory)
+    #   (use "git restore <file>..." to discard changes in working directory)
     #
     #	modified:   nyan.txt
     #
@@ -187,7 +187,7 @@
 
         猫の鳴き声を管理するファイルを作成
         
-twitterのタイムラインと一緒で、あたらしいものほど上に来ています。ふたつのコミットがあるのが確認できますね。--graph というオプションをつけて実行すると、コミットの親子関係を視覚化することもできます。
+twitterのタイムラインと一緒で、**あたらしいものほど上に**来ています。ふたつのコミットがあるのが確認できますね。--graph というオプションをつけて実行すると、コミットの親子関係を視覚化することもできます。
 
     $ git log --graph
     * commit 66346b53f10bbe68efb14d72a56eea836dd7e0f2
