@@ -121,7 +121,7 @@
     # On branch master
     # Changes not staged for commit:
     #   (use "git add/rm <file>..." to update what will be committed)
-    #   (use "git checkout -- <file>..." to discard changes in working directory)
+    #   (use "git restore --staged..." to discard changes in working directory)
     #
     #	deleted:    boo.txt
     #
