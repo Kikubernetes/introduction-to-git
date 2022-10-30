@@ -131,7 +131,7 @@ done.
 ！？ developmentブランチがないぞ！？ グラフも確認しましょう。
 
     $ git graph
-    * 253585d  (HEAD -> origin/main, origin/development, origin/HEAD -> main) 2013-05-07 TAKASHI 猫好きの話を追加
+    * 253585d  (HEAD -> main, origin/main, origin/development, origin/HEAD) 2013-05-07 TAKASHI 猫好きの話を追加
 
 なんか知らないのたくさんある！怖い！！
 
