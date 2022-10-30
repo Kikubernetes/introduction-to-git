@@ -36,7 +36,7 @@
 というわけで、今は新規に作成された wan.txt と boo.txt が staging area に上がっているはずです。それを見てみましょう。
 
     $ git status
-    # On branch master
+    # On branch main
     # Changes to be committed:
     #   (use "git restore --staged <file>..." to unstage)
     #
@@ -52,7 +52,7 @@
 
 エディタが立ち上がるので「犬と豚の鳴き声を追加」とコミットメッセージを書いて保存、終了。
 
-    [master 66c681b] 犬と豚の鳴き声を追加
+    [main 66c681b] 犬と豚の鳴き声を追加
      2 files changed, 2 insertions(+)
      create mode 100644 boo.txt
      create mode 100644 wan.txt
@@ -102,7 +102,7 @@
 さて、これで、作業ディレクトリ内には、「boo.txtが削除された」という変化がおこりました。`git status` でそれを確認してみましょう。
 
     $ git status
-    # On branch master
+    # On branch main
     # Changes not staged for commit:
     #   (use "git add/rm <file>..." to update what will be committed)
     #   (use "git restore <file>..." to discard changes in working directory)
@@ -118,7 +118,7 @@
 確認
 
     $ git status
-    # On branch master
+    # On branch main
     # Changes not staged for commit:
     #   (use "git add/rm <file>..." to update what will be committed)
     #   (use "git restore --staged..." to discard changes in working directory)
@@ -137,9 +137,9 @@
     rm 'boo.txt'
     
     $ git status
-    # On branch master
+    # On branch main
     # Changes to be committed:
-    #   (use "git reset HEAD <file>..." to unstage)
+    #   (use "git restore --staged  <file>..." to unstage)
     #
     #	deleted:    boo.txt
     #
@@ -150,27 +150,27 @@
 
 そのために、まずは、stage された変更を unstage して、さらに作業ディレクトリで行った変更をなかったことにしましょう。
 
-`git status` で出てきた内容に、「use "git reset HEAD \<file\>..." to unstage」とありますから、従いましょう
+`git status` で出てきた内容に、「use "git restore --staged  \<file\>..." to unstage」とありますから、従いましょう
 
-    $ git reset HEAD boo.txt
+    $ git restore --staged  boo.txt
     D	boo.txt
 
     $ git status
-    # On branch master
+    # On branch main
     # Changes not staged for commit:
     #   (use "git add/rm <file>..." to update what will be committed)
-    #   (use "git checkout -- <file>..." to discard changes in working directory)
+    #   (use "git restore <file>..." to discard changes in working directory)
     #
     #	deleted:    boo.txt
     #
     no changes added to commit (use "git add" and/or "git commit -a")
 
-はい、not staged な状態に戻りました。さらに、作業ディレクトリの変更を「なかったこと」にしましょう。`git status` に出てきている「use "git checkout -- <file>..." to discard changes in working directory」に従えばいいですね。
+はい、not staged な状態に戻りました。さらに、作業ディレクトリの変更を「なかったこと」にしましょう。`git status` に出てきている「use "git restore <file>..." to discard changes in working directory」に従えばいいですね。
 
-    $ git checkout -- boo.txt
+    $ git restore boo.txt
     
     $ git status
-    # On branch master
+    # On branch main
     nothing to commit, working directory clean
 
 はい、「以前のコミットから作業ディレクトリの中に変更点はないよ」という状態になっていますね。ディレクトリの中を覗いてみると boo.txt が復活しているのが見て取れると思います。
@@ -186,7 +186,7 @@
     rm 'boo.txt'
 
     $ git status
-    # On branch master
+    # On branch main
     # Changes to be committed:
     #   (use "git restore --staged <file>..." to unstage)
     #
@@ -198,7 +198,7 @@
 ではこの変更をコミットしましょう。コミットメッセージは「豚の鳴き声は要らないので削除」くらいにしておきましょうか。
 
     $ git commit
-    [master 8faaa1f] 豚の鳴き声は要らないので削除
+    [main 8faaa1f] 豚の鳴き声は要らないので削除
      1 file changed, 1 deletion(-)
      delete mode 100644 boo.txt
 
@@ -245,10 +245,10 @@
 さて、これで「ファイルのリネーム」という変化が作業ディレクトリに起こりましたね。じゃあ `git status` で確認です。
 
     $ git status
-    # On branch master
+    # On branch main
     # Changes not staged for commit:
     #   (use "git add/rm <file>..." to update what will be committed)
-    #   (use "git checkout -- <file>..." to discard changes in working directory)
+    #   (use "git restore <file>..." to discard changes in working directory)
     #
     #	deleted:    nyan.txt
     #	deleted:    wan.txt
@@ -281,9 +281,9 @@ nyan.txt は名前がかわり、mew.txt になりました。これは、別の
     rm 'wan.txt'
     
     $ git status
-    # On branch master
+    # On branch main
     # Changes to be committed:
-    #   (use "git reset HEAD <file>..." to unstage)
+    #   (use "git restore --staged  <file>..." to unstage)
     #
     #	renamed:    wan.txt -> bow.txt
     #	renamed:    nyan.txt -> mew.txt
@@ -301,7 +301,7 @@ nyan.txt は名前がかわり、mew.txt になりました。これは、別の
 ではこれを commit しておきましょう。コミットメッセージは「ファイル名を英語に変更」とかでしょうか。
 
     $ git commit
-    [master bb8f610] ファイル名を英語に変更
+    [main bb8f610] ファイル名を英語に変更
      2 files changed, 0 insertions(+), 0 deletions(-)
      rename wan.txt => bow.txt (100%)
      rename nyan.txt => mew.txt (100%)
@@ -348,10 +348,10 @@ nyan.txt は名前がかわり、mew.txt になりました。これは、別の
 
 移動させましたか？では `git status`。
 
-    # On branch master
+    # On branch main
     # Changes not staged for commit:
     #   (use "git add/rm <file>..." to update what will be committed)
-    #   (use "git checkout -- <file>..." to discard changes in working directory)
+    #   (use "git restore <file>..." to discard changes in working directory)
     #
     #	deleted:    bow.txt
     #	deleted:    mew.txt
@@ -373,9 +373,9 @@ nyan.txt は名前がかわり、mew.txt になりました。これは、別の
     rm 'mew.txt'
 
     $ git status
-    # On branch master
+    # On branch main
     # Changes to be committed:
-    #   (use "git reset HEAD <file>..." to unstage)
+    #   (use "git restore --staged  <file>..." to unstage)
     #
     #	renamed:    bow.txt -> animals/bow.txt
     #	renamed:    mew.txt -> animals/mew.txt
@@ -395,7 +395,7 @@ nyan.txt は名前がかわり、mew.txt になりました。これは、別の
 ではコミット。コミットメッセージは「動物ファイルを animals ディレクトリに移動」くらいでしょうか
 
     $ git commit
-    [master 5fe17c7] 動物ファイルを animals ディレクトリに移動
+    [main 5fe17c7] 動物ファイルを animals ディレクトリに移動
      2 files changed, 0 insertions(+), 0 deletions(-)
      rename bow.txt => animals/bow.txt (100%)
      rename mew.txt => animals/mew.txt (100%)
