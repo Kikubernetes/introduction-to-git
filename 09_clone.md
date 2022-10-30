@@ -165,7 +165,7 @@ done.
 それでは、それを念頭においてから、先ほどの graph の結果を眺めてみましょう。
 
     $ git graph
-    * 253585d  (HEAD -> origin/main, origin/development, origin/HEAD -> main) 2013-05-07 TAKASHI 猫好きの話を追加
+    * 253585d  (HEAD -> main, origin/main, origin/development, origin/HEAD) 2013-05-07 TAKASHI 猫好きの話を追加
 
 origin/main, origin/development, origin/HEAD というみっつのブランチがありますね。これらはそれぞれ、「origin リモートリポジトリ(つまり clone 元)の main ブランチ」「origin リモートリポジトリの development ブランチ」「origin リモートリポジトリのHEAD」を表しています。`git clone` をすると、クローン元に存在するコミットとブランチを、手元に複製してきます。このとき、ブランチは「リモートブランチ」としてコピーされてきます。リモートリポジトリからコピーされてきたブランチなので、「リモートブランチ」です。
 
@@ -191,7 +191,7 @@ origin/main, origin/development, origin/HEAD というみっつのブランチ�
 
 さて、ゆうすけは今から作業を行うために、development ブランチからトピックブランチを切らなければなりません。なので、なにはともあれ手元に development ブランチが必要です。
 
-というわけで、「origin/development」を追跡する development ブランチを、手元に作成しましょう。リモートブランチを追跡するブランチを作成するためには、 `git branch ＜手元のブランチの名前＞ ＜追跡したいリモートブランチの名前＞`です。やってみましょう。
+というわけで、**「origin/development」を追跡する development ブランチを、手元に作成しましょう。リモートブランチを追跡するブランチを作成するためには、 `git branch ＜手元のブランチの名前＞ ＜追跡したいリモートブランチの名前＞`です。**やってみましょう。
 
     $ git branch development origin/development
     Branch development set up to track remote branch development from origin.
