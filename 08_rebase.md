@@ -103,7 +103,7 @@
 
 うん、まだ中途半端な状態ですね。
 
-でも、ここでディレクターから「おい頭おかしいってなんだよこれすぐ直して！」と言われてしまいました。 master を checkout してそこから hotfix ブランチを作らないと！
+でも、ここでディレクターから「おい頭おかしいってなんだよこれすぐ直して！」と言われてしまいました。 main を checkout してそこから hotfix ブランチを作らないと！
 
 でもちょっと待ってください。あなたの作業ディレクトリには、まだコミットされてない変更があります。しかもこの中途半端な状態の変更をコミットしたくはありません。困りましたね！ でも、今はとりあえず気にせず、ひとまずコミットしてしまいましょう。コミットさえしておけばいつでもこの状態に戻れるのですからね！
 
@@ -115,8 +115,8 @@
 
 ```
 $ git gprah
-* 1321d1b  (HEAD, unify_styles) 2013-05-06 Shinpei Maruyama 作業途中だがとりあえずコミットしておく
-* 15248b3  (master) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
+* 1321d1b  (HEAD -> unify_styles) 2013-05-06 Shinpei Maruyama 作業途中だがとりあえずコミットしておく
+* 15248b3  (main) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
 ```
 はい、いいですね。
 
@@ -124,7 +124,7 @@ $ git gprah
 
 ## hotfix しよう
 
-まずは master を checkout して文体統一のための作業を行う前の状態を復元して、そこから hotfix ブランチを切って選択しましょう。
+まずは main を checkout して文体統一のための作業を行う前の状態を復元して、そこから hotfix ブランチを切って選択しましょう。
 
 やりかたはわかりますね？ わからないひとは前回、前々回を復習してください。
 
@@ -138,16 +138,16 @@ $ git gprah
 
 ```
 $ git graph
-* 18fca6b  (HEAD, hotfix) 2013-05-06 Shinpei Maruyama 頭おかしいという表現はまずいので修正
+* 18fca6b  (HEAD -> hotfix) 2013-05-06 Shinpei Maruyama 頭おかしいという表現はまずいので修正
 | * 1321d1b  (unify_styles) 2013-05-06 Shinpei Maruyama 作業途中だがとりあえずコミットしておく
 |/
-* 15248b3  (master) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
+* 15248b3  (main) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
 ```
 
-ふむ、良いですね。ディレクターから OK が出たので、master にマージしてリリースしちゃいましょう。
+ふむ、良いですね。ディレクターから OK が出たので、main にマージしてリリースしちゃいましょう。
 
 ```
-$ git checkout master
+$ git checkout main
 $ git merge hotfix --no-ff
 ```
 
@@ -163,7 +163,7 @@ $ git branch -d hotfix
 
 ```
 $ git graph
-*   662776b  (HEAD, master) 2013-05-06 Shinpei Maruyama Merge branch 'hotfix'
+*   662776b  (HEAD -> main) 2013-05-06 Shinpei Maruyama Merge branch 'hotfix'
 |\
 | * 18fca6b  2013-05-06 Shinpei Maruyama 頭おかしいという表現はまずいので修正
 |/
@@ -192,7 +192,7 @@ unify_styles ブランチを checkout して、作業を進めたいところで
 
 が、もしも
 
-    *   662776b  (HEAD, master) 2013-05-06 Shinpei Maruyama Merge branch 'hotfix'
+    *   662776b  (HEAD -> main) 2013-05-06 Shinpei Maruyama Merge branch 'hotfix'
 
 から分岐していてくれれば、なんだかシンプルなのになー、と思いませんか？
 
@@ -206,7 +206,7 @@ unify_styles ブランチを checkout して、作業を進めたいところで
 
 で、unify_styles を選択しましょう。その状態で、
 
-    $ git rebase master
+    $ git rebase main
 
 としてみましょう。お、なんか出ましたね。
 
@@ -219,8 +219,8 @@ Applying: 作業途中だがとりあえずコミットしておく
 
 ```
 $ git graph
-* 03f91be  (HEAD, unify_styles) 2013-05-06 Shinpei Maruyama 作業途中だがとりあえずコミットしておく
-*   87fe5eb  (master) 2013-05-06 Shinpei Maruyama Merge branch 'hotfix'
+* 03f91be  (HEAD -> unify_styles) 2013-05-06 Shinpei Maruyama 作業途中だがとりあえずコミットしておく
+*   87fe5eb  (main) 2013-05-06 Shinpei Maruyama Merge branch 'hotfix'
 |\
 | * 0bd5673  2013-05-06 Shinpei Maruyama 頭おかしいという表現はまずいので修正
 |/
@@ -292,13 +292,13 @@ Applying: 作業途中だがとりあえずコミットしておく
 それを理解する補助線として、まずは「もしもあなたが手動で rebase と同じことをするとしたらどうする？」という話を考えましょう。以下の手順で、同じことができますね。
 
 1. unify_styles の各コミットで「どのような変更を行ったのか」を覚えておく
-1. master (hotfix を merge したあとの状態) を checkoutする
+1. main (hotfix を merge したあとの状態) を checkoutする
 1. そこから新しくまた unify_stylesブランチを切る
 1. 覚えておいた「どのような変更を行ったのか」をイチから適用し直して行く。
 
 じつは、rebase で行われていることもこれとかわりがありません。
 
-まずは、unify_styles を「巻き戻し」して、master からあたらしくブランチを切り直します。そこから、unify_styles の各コミットで行った変更を、master が指しているコミットに対して適用しなおしているわけです。つまり、「適用中：作業途中だがとりあえずコミットしておく」が意味しているのは、そのコミットで行った変更内容を、再度 master から適用しなおしているよ、という意味だったのですね！
+まずは、unify_styles を「巻き戻し」して、main からあたらしくブランチを切り直します。そこから、unify_styles の各コミットで行った変更を、main が指しているコミットに対して適用しなおしているわけです。つまり、「適用中：作業途中だがとりあえずコミットしておく」が意味しているのは、そのコミットで行った変更内容を、再度 main から適用しなおしているよ、という意味だったのですね！
 
 ということはですよ？
 
@@ -408,8 +408,8 @@ cat cat_hater_said.txt
 
 ```
 $ git graph
-* 519a167  (HEAD, unify_styles) 2013-05-06 Shinpei Maruyama 文体を統一
-*   87fe5eb  (master) 2013-05-06 Shinpei Maruyama Merge branch 'hotfix'
+* 519a167  (HEAD -> unify_styles) 2013-05-06 Shinpei Maruyama 文体を統一
+*   87fe5eb  (main) 2013-05-06 Shinpei Maruyama Merge branch 'hotfix'
 |\
 | * 0bd5673  2013-05-06 Shinpei Maruyama 頭おかしいという表現はまずいので修正
 |/
@@ -422,9 +422,9 @@ $ git graph
 
 ## あとはリリース
 
-さて、「文体の統一」の作業の結果をディレクターにチェックしてもらい、OK が出ました。あとは master に merge してリリースしてしまいましょう。
+さて、「文体の統一」の作業の結果をディレクターにチェックしてもらい、OK が出ました。あとは main に merge してリリースしてしまいましょう。
 
-    $ git checkout master
+    $ git checkout main
     $ git merge --no-ff unify_styles
     $ git branch -d unify_styles
 
@@ -432,7 +432,7 @@ $ git graph
 
 ```
 $ git graph
-*   fe4090c  (HEAD, master) 2013-05-06 Shinpei Maruyama Merge branch 'unify_styles'
+*   fe4090c  (HEAD -> main) 2013-05-06 Shinpei Maruyama Merge branch 'unify_styles'
 |\
 | * 519a167  2013-05-06 Shinpei Maruyama 文体を統一
 |/
