@@ -2,6 +2,11 @@
 
 本文中に出てきたターミナル設定用のコマンドをまとめました。
 
+ #### 初めてgitを使う場合
+ 
+    $ git config --global user.name 'YOUR NAME'
+    $ git config --global user.email 'yourmail@example.com'
+
  #### .DS_Store（macの開いた履歴などを記録している）をgitに送るファイルに含めない
 
     $ git config --global core.excludesfile ~/.gitignore_global
