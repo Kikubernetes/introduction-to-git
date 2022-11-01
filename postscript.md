@@ -28,6 +28,6 @@
     $ git clone https://・・・
     $ cd 上記で作ったリポジトリ名（同名のディレクトリができている）
     
-これで本文中にある　[git init]()　までが終了します。
+これで本文中にある　[git init](https://github.com/Kikubernetes/introduction-to-git/blob/master/02_first_commit.md#作業ディレクトリで作業をしよう)　までが終了します。
 （追記）途中でgitのバージョンを上げたらなぜかできるようになりました。masterとmainの食い違いが原因だったかもしれません。
 
