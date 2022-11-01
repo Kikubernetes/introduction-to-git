@@ -79,7 +79,7 @@ Git 運用のコツとして、なにか変更を行うときにはブランチ�
 念のため今の状態を確認しておきましょう。
 
     $ git graph
-    * 8efecbd  (HEAD, unify_styles, main) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
+    * 8efecbd  (HEAD -> unify_styles, main) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
     
     $ git branch
       main
@@ -139,7 +139,7 @@ Git 運用のコツとして、なにか変更を行うときにはブランチ�
 
 ```
 $ git graph
-* ff00bb6  (HEAD, unify_styles) 2013-05-06 Shinpei Maruyama 文体を統一
+* ff00bb6  (HEAD -> unify_styles) 2013-05-06 Shinpei Maruyama 文体を統一
 * 8efecbd  (main) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
 ```
 
@@ -157,7 +157,7 @@ VCS を使っていなければ「えー前の状態に戻してからまた別�
 
 ```
 $ git graph
-* ff00bb6  (HEAD, unify_styles) 2013-05-06 Shinpei Maruyama 文体を統一
+* ff00bb6  (HEAD -> unify_styles) 2013-05-06 Shinpei Maruyama 文体を統一
 * 8efecbd  (main) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
 ```
 
@@ -174,7 +174,7 @@ $ git checkout main
 ```
 $ git graph
 * ff00bb6  (unify_styles) 2013-05-06 Shinpei Maruyama 文体を統一
-* 8efecbd  (HEAD, main) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
+* 8efecbd  (HEAD -> main) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
 ```
 
 HEAD が mainを指している(= mainブランチが選択されている)のが確認できました。
@@ -206,7 +206,7 @@ hotfixができていて、選択されていますね。graph も確認しま�
 ```
 $ git graph
 * ff00bb6  (unify_styles) 2013-05-06 Shinpei Maruyama 文体を統一
-* 8efecbd  (HEAD, main, hotfix) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
+* 8efecbd  (HEAD -> main, hotfix) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
 ```
 
 hotfix は main と同じコミットを指していますね。
@@ -222,7 +222,7 @@ hotfix は main と同じコミットを指していますね。
 ではここで graph 確認。
 
 ```
-* 5f26eb2  (HEAD, hotfix) 2013-05-06 Shinpei Maruyama 頭がおかしいという表現はまずいので修正
+* 5f26eb2  (HEAD -> hotfix) 2013-05-06 Shinpei Maruyama 頭がおかしいという表現はまずいので修正
 | * ff00bb6  (unify_styles) 2013-05-06 Shinpei Maruyama 文体を統一
 |/  
 * 8efecbd  (main) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
@@ -250,7 +250,7 @@ Fast-forward
 
 ```
 $ git graph
-* 5f26eb2  (HEAD, main, hotfix) 2013-05-06 Shinpei Maruyama 頭がおかしいという表現はまずいので修正
+* 5f26eb2  (HEAD -> main, hotfix) 2013-05-06 Shinpei Maruyama 頭がおかしいという表現はまずいので修正
 | * ff00bb6  (unify_styles) 2013-05-06 Shinpei Maruyama 文体を統一
 |/  
 * 8efecbd  2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
@@ -267,7 +267,7 @@ merge する前は、「猫好きの話と犬好きの話を作成」のコミ�
 merge を行う前のグラフを再度見てみましょう。
 
 ```
-* 5f26eb2  (HEAD, hotfix) 2013-05-06 Shinpei Maruyama 頭がおかしいという表現はまずいので修正
+* 5f26eb2  (HEAD -> hotfix) 2013-05-06 Shinpei Maruyama 頭がおかしいという表現はまずいので修正
 | * ff00bb6  (unify_styles) 2013-05-06 Shinpei Maruyama 文体を統一
 |/  
 * 8efecbd  (main) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
@@ -276,7 +276,7 @@ merge を行う前のグラフを再度見てみましょう。
 でしたね。今回のマージには関係のない unify_styles を無視してこのグラフを見てみましょう。
 
 ```
-* 5f26eb2  (HEAD, hotfix) 2013-05-06 Shinpei Maruyama 頭がおかしいという表現はまずいので修正
+* 5f26eb2  (HEAD -> hotfix) 2013-05-06 Shinpei Maruyama 頭がおかしいという表現はまずいので修正
 |  
 * 8efecbd  (main) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
 ```
@@ -299,7 +299,7 @@ $ git graph
 * 5f26eb2  (hotfix) 2013-05-06 Shinpei Maruyama 頭がおかしいという表現はまずいので修正
 | * ff00bb6  (unify_styles) 2013-05-06 Shinpei Maruyama 文体を統一
 |/  
-* 8efecbd  (HEAD, main) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
+* 8efecbd  (HEAD -> main) 2013-05-06 Shinpei Maruyama 猫好きの話と犬好きの話を作成
 ```
 
 うん、いいですね。main の位置がもとに戻っています。念のため、ファイルの内容ももどに戻っていることを確認してください。いいですね？
@@ -322,7 +322,7 @@ Merge made by the 'recursive' strategy.
 うん、'recursive' stragy でマージされてますね。グラフも確認しましょう。
 
 ```
-*   7090c03  (HEAD, main) 2013-05-06 Shinpei Maruyama Merge branch 'hotfix'
+*   7090c03  (HEAD -> main) 2013-05-06 Shinpei Maruyama Merge branch 'hotfix'
 |\  
 | * 5f26eb2  (hotfix) 2013-05-06 Shinpei Maruyama 頭がおかしいという表現はまずいので修正
 |/  
@@ -379,7 +379,7 @@ $ git branch -d hotfix
 
 ```
 $ git graph
-* ddfdb5f  (HEAD, unify_styles) 2013-05-06 Shinpei Maruyama "ヘッヘッヘッヘッ" という表現は残すようにした
+* ddfdb5f  (HEAD -> unify_styles) 2013-05-06 Shinpei Maruyama "ヘッヘッヘッヘッ" という表現は残すようにした
 | *   7090c03  (main) 2013-05-06 Shinpei Maruyama Merge branch 'hotfix'
 | |\  
 | | * 5f26eb2  2013-05-06 Shinpei Maruyama 頭がおかしいという表現はまずいので修正
@@ -643,7 +643,7 @@ unify_stylesをマージします。
 
 ```
 $ git graph
-*   16fa3b3  (HEAD, main) 2013-05-06 Shinpei Maruyama Merge branch 'unify_styles'
+*   16fa3b3  (HEAD -> main) 2013-05-06 Shinpei Maruyama Merge branch 'unify_styles'
 |\  
 | * ddfdb5f  (unify_styles) 2013-05-06 Shinpei Maruyama "ヘッヘッヘッヘッ" という表現は残すようにした
 * |   7090c03  2013-05-06 Shinpei Maruyama Merge branch 'hotfix'
